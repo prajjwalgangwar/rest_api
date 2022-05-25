@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:rest_api/providers/AppServices.dart';
+import 'package:rest_api/providers/RemoteService.dart';
 import 'package:rest_api/views/Home.dart';
 import 'package:get/get.dart';
 import 'package:rest_api/views/PostsPage.dart';
 import 'package:http/http.dart' as http;
 
-void main() {
+void main() async{
+  // await ServiceController().getTodos();
   WidgetsFlutterBinding.ensureInitialized();
   runApp(MyApp());
 }

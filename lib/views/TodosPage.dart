@@ -1,11 +1,15 @@
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconly/iconly.dart';
 import 'package:rest_api/models/post_model.dart';
-import 'package:rest_api/providers/AppServices.dart';
+import 'package:rest_api/providers/ServicesController.dart';
+import 'package:rest_api/providers/RemoteService.dart';
+import 'package:rest_api/utilities/Variables.dart';
 import 'package:rest_api/widgets/CustomAppBar.dart';
 
 import '../models/todos_model.dart';
+import '../utilities/AppColors.dart';
 
 class TodosPage extends StatefulWidget{
   @override
@@ -13,24 +17,8 @@ class TodosPage extends StatefulWidget{
 }
 class TodosPageState extends State<TodosPage>{
 
-  List<Todos>? todos;
-  bool isLoaded = false;
+  final TodoController todoController = Get.put(TodoController());
 
-  @override
-  void initState() {
-    getTodosData();
-    super.initState();
-
-  }
-
-  getTodosData()async{
-    todos =  await ServiceController().getTodos();
-    if(todos != null){
-      setState(() {
-        isLoaded = true;
-      });
-    }
-  }
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -40,35 +28,29 @@ class TodosPageState extends State<TodosPage>{
             Container(
               height: 60,
               decoration: BoxDecoration(
-                color: Colors.deepPurple.shade800,
+                color: AppColors.homeApiListTileColor[4],
                 borderRadius: BorderRadius.vertical(bottom: Radius.circular(10),)
               ),
-              child: Center(child: Text('https://jsonplaceholder.typicode.com/posts', style: TextStyle(fontSize: 12, color: Colors.deepPurple.shade50),)),
+              child: Center(child: Text(Variables.apiExampleList.values.elementAt(4)[1], style: TextStyle(fontSize: 12, color: Colors.deepPurple.shade50),)),
             ),
-            todos !=null ? Expanded(
-              child: ListView.builder(
-                itemCount: todos?.length,
+            Expanded(
+              child: Obx(()=>ListView.builder(
+                itemCount: todoController.todoList.length,
                   itemBuilder: (context, index) {
-                  return Container(
+                    return Container(
                   margin: EdgeInsets.all(10),
-                  child: ListTile(
+                  child: CheckboxListTile(
                     tileColor: Colors.deepPurple.shade50,
-                    title: Text(todos![index].title, overflow: TextOverflow.ellipsis,),
-                    leading: Container(
-                      padding: EdgeInsets.all(5),
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Colors.deepPurple.shade900, width: 1),
-                        borderRadius: BorderRadius.circular(10)
-                      ),
-                      child: Text(
-                          todos![index].id.toString()
-                      )
-                    ),
+                    secondary: Icon(IconlyBold.buy),
+                    title: Text(todoController.todoList[index].title.toString(), overflow: TextOverflow.ellipsis,),
+                   subtitle: Text(todoController.todoList[index].title.toString(), overflow: TextOverflow.ellipsis,),
+                   onChanged: (bool? value) {  },
+                    value: todoController.todoList[index].completed,
                   ),
                 );
 
-              }),
-            ): Center(child: CircularProgressIndicator())
+              })),
+            )
           ],
         ),
       ),

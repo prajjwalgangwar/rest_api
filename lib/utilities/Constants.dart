@@ -7,6 +7,7 @@ class AppConstants{
     'https://jsonplaceholder.typicode.com/albums',
     'https://jsonplaceholder.typicode.com/photos',
     'https://jsonplaceholder.typicode.com/todos',
-    'https://jsonplaceholder.typicode.com/users'
+    'https://jsonplaceholder.typicode.com/users',
+    'https://anaajapp.com/api/categories'
   ];
 }

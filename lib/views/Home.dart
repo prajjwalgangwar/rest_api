@@ -9,7 +9,7 @@ import 'package:rest_api/views/TodosPage.dart';
 import 'package:rest_api/views/UsersPage.dart';
 import 'package:rest_api/widgets/CustomAppBar.dart';
 
-import '../providers/AppServices.dart';
+import '../providers/RemoteService.dart';
 
 class Home extends StatelessWidget{
 
@@ -25,60 +25,60 @@ class Home extends StatelessWidget{
           children: [
             const CustomAppBar(),
             Expanded(
-              child: ListView.builder(
-                itemCount: Variables.apiExampleList.keys.length,
-                  itemBuilder: (context, index) {
-                return InkWell(
-                  onTap: ()async{
-                    // Variables.serviceCall(index);
+              child: Container(
 
-                    await ServiceController().getPhotos();
-                    Variables.route(index);
-                  },
-                  child: Container(
-                    margin: const EdgeInsets.only(left: 20, right: 20, top: 30),
-                    padding: const EdgeInsets.all(20),
+                child: ListView.builder(
+                  itemCount: Variables.apiExampleList.keys.length,
+                    itemBuilder: (context, index) {
+                  return InkWell(
+                    onTap: ()async{
+                      Variables.route(index);
+                    },
+                    child: Container(
+                      margin: const EdgeInsets.only(left: 20, right: 20, top: 30),
+                      padding: const EdgeInsets.all(20),
 
-                    decoration: BoxDecoration(
-                        color:  Variables.apiExampleList.values.elementAt(index)[3],
-                      borderRadius: BorderRadius.circular(20),
-                      border: Border.all(
-                          color: Colors.orange,
-                        width: 2
-                      )
-                    ),
-                    height: 80,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Icon(Variables.apiExampleList.values.elementAt(index)[2], color: Colors.orange.shade50,),
+                      decoration: BoxDecoration(
+                          color:  Variables.apiExampleList.values.elementAt(index)[3],
+                        borderRadius: BorderRadius.circular(20),
+                        border: Border.all(
+                            color: Colors.orange,
+                          width: 2
+                        )
+                      ),
+                      height: 80,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Icon(Variables.apiExampleList.values.elementAt(index)[2], color: Colors.orange.shade50,),
 
-                        Text(
-                          '${Variables.apiExampleList.values.elementAt(index)[1]}',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: Colors.orange.shade50,
-                            fontWeight: FontWeight.w400,
-                            letterSpacing: 1
+                          Text(
+                            '${Variables.apiExampleList.values.elementAt(index)[1]}',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              color: Colors.orange.shade50,
+                              fontWeight: FontWeight.w400,
+                              letterSpacing: 1
+                            ),
                           ),
-                        ),
-                        Container(
-                          padding: EdgeInsets.all(5),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            border: Border.all(color: Colors.orange.shade50,)
-                          ),
-                            child: Text(' ' + index.toString() + ' ', style: TextStyle(
-                                color: Colors.orange.shade50,
-                                fontWeight: FontWeight.w400,
-                                fontSize: 10,
-                                letterSpacing: 1
-                            ),), )
-                      ],
+                          Container(
+                            padding: EdgeInsets.all(5),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              border: Border.all(color: Colors.orange.shade50,)
+                            ),
+                              child: Text(' ' + index.toString() + ' ', style: TextStyle(
+                                  color: Colors.orange.shade50,
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 10,
+                                  letterSpacing: 1
+                              ),), )
+                        ],
+                      ),
                     ),
-                  ),
-                );
-              }),
+                  );
+                }),
+              ),
             ),
 
           ],

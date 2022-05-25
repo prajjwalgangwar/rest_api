@@ -1,38 +1,22 @@
 
 import 'package:flutter/material.dart';
+import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
+import 'package:get/instance_manager.dart';
 import 'package:iconly/iconly.dart';
 import 'package:rest_api/models/post_model.dart';
-import 'package:rest_api/providers/AppServices.dart';
+import 'package:rest_api/providers/RemoteService.dart';
+import 'package:rest_api/utilities/AppColors.dart';
 import 'package:rest_api/utilities/Constants.dart';
 import 'package:rest_api/utilities/Variables.dart';
 import 'package:rest_api/widgets/CustomAppBar.dart';
 
 import '../models/photos_model.dart';
+import '../providers/ServicesController.dart';
 
-class PhotosPage extends StatefulWidget{
-  @override
-  PhotosPageState createState()=> PhotosPageState();
-}
-class PhotosPageState extends State<PhotosPage>{
+class PhotosPage extends StatelessWidget{
 
-  List<Photos>? photos;
-  bool isLoaded = false;
-
-  @override
-  void initState() {
-    getPhotosData();
-    super.initState();
-
-  }
-
-  getPhotosData()async{
-    photos =  await ServiceController().getPhotos();
-    if(photos != null){
-      setState(() {
-        isLoaded = true;
-      });
-    }
-  }
+  final PhotoController photoController = Get.put(PhotoController())
+;
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -42,20 +26,21 @@ class PhotosPageState extends State<PhotosPage>{
             Container(
               height: 60,
               decoration: BoxDecoration(
-                color: Colors.red.shade400,
-                border: Border.all(
-                  color: Colors.red.shade900,
-                  width: 2
-                ),
-                borderRadius: BorderRadius.vertical(bottom: Radius.circular(10),
-
+                color: AppColors.homeApiListTileColor[3],
+                borderRadius: const BorderRadius.vertical(bottom: Radius.circular(10),
                 )
               ),
-              child: Center(child: Text(Variables.apiExampleList.values.elementAt(3)[1].toString(), style: TextStyle(fontSize: 14,fontWeight: FontWeight.w700, color: Colors.deepPurple.shade50, letterSpacing: 2, ),)),
+              child: Center(child: Text(Variables.apiExampleList.values.elementAt(3)[1].toString(),
+                style: TextStyle(
+                  fontSize: 14,fontWeight:
+                FontWeight.w700, color:
+                Colors.deepPurple.shade50,
+                  letterSpacing: 2, ),)
+              ),
             ),
-            photos !=null ? Expanded(
-              child: ListView.builder(
-                itemCount: photos?.length,
+            Expanded(
+              child:Obx(()=> ListView.builder(
+                itemCount: photoController.photoList.length,
                   itemBuilder: (context, index) {
                   return Container(
                   margin: const EdgeInsets.all(10),
@@ -74,8 +59,8 @@ class PhotosPageState extends State<PhotosPage>{
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(photos![index].id.toString(), overflow: TextOverflow.ellipsis,style: TextStyle(fontSize: 10, color: Colors.red.shade50),),
-                            Text(photos![index].title, overflow: TextOverflow.ellipsis, style: TextStyle(fontSize: 10, color: Colors.red.shade50),),
+                            Text(photoController.photoList[index].id.toString(), overflow: TextOverflow.ellipsis,style: TextStyle(fontSize: 10, color: Colors.red.shade50),),
+                            Text(photoController.photoList[index].title, overflow: TextOverflow.ellipsis, style: TextStyle(fontSize: 10, color: Colors.red.shade50),),
                           ],
                         ),
                       ),
@@ -88,11 +73,11 @@ class PhotosPageState extends State<PhotosPage>{
                             width: 50,
                               height: 50,
                               margin: EdgeInsets.only(right: 20),
-                              child: Image.network('${photos![index].thumbnailUrl}')),
+                              child: Image.network('${photoController.photoList[index].thumbnailUrl}')),
                           Container(
                             width: 200,
                               height: 200,
-                              child: Image.network('${photos![index].url}')),
+                              child: Image.network('${photoController.photoList[index].url}')),
                         ],
                       ),
 
@@ -100,11 +85,12 @@ class PhotosPageState extends State<PhotosPage>{
                   )
                 );
 
-              }),
-            ): Center(child: CircularProgressIndicator())
+              })),
+            )
           ],
         ),
       ),
     );
   }
 }
+

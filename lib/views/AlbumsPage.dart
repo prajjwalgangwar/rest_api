@@ -1,38 +1,24 @@
-
 import 'package:flutter/material.dart';
-import 'package:iconly/iconly.dart';
-import 'package:rest_api/models/comments_model.dart';
-import 'package:rest_api/models/post_model.dart';
-import 'package:rest_api/providers/AppServices.dart';
-import 'package:rest_api/views/CommentsPage.dart';
-import 'package:rest_api/widgets/CustomAppBar.dart';
+import 'package:get/get.dart';
+import 'package:get/instance_manager.dart';
+import 'package:rest_api/providers/ServicesController.dart';
+import 'package:rest_api/providers/RemoteService.dart';
 
 import '../models/albums_model.dart';
+import '../utilities/AppColors.dart';
+import '../utilities/Variables.dart';
 
-class AlbumsPage extends StatefulWidget{
+class AlbumsPage extends StatefulWidget {
+  const AlbumsPage({Key? key}) : super(key: key);
+
   @override
-  AlbumsPageState createState()=> AlbumsPageState();
+  AlbumsPageState createState() => AlbumsPageState();
 }
-class AlbumsPageState extends State<AlbumsPage>{
 
-  List<Albums>? albums;
-  bool isLoaded = false;
+class AlbumsPageState extends State<AlbumsPage> {
 
-  @override
-  void initState() {
-     getAlbumsData();
-    super.initState();
+  final AlbumController albumController = Get.put(AlbumController());
 
-  }
-
-  getAlbumsData()async{
-    albums =  await ServiceController().getAlbums();
-    if(albums != null){
-      setState(() {
-        isLoaded = true;
-      });
-    }
-  }
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -42,33 +28,33 @@ class AlbumsPageState extends State<AlbumsPage>{
             Container(
               height: 60,
               decoration: BoxDecoration(
-                color: Colors.deepPurple.shade800,
-                borderRadius: BorderRadius.vertical(bottom: const Radius.circular(10),)
+                  color: AppColors.homeApiListTileColor[2],
+                  borderRadius: const BorderRadius.vertical(bottom: Radius.circular(10),)
               ),
-              child: Center(child: Text('https://jsonplaceholder.typicode.com/posts', style: TextStyle(fontSize: 12, color: Colors.deepPurple.shade50),)),
+              child: Center(child: Text(Variables.apiExampleList.values.elementAt(2)[1], style: TextStyle(
+                fontSize: 14,fontWeight:
+              FontWeight.w700, color:
+              Colors.deepPurple.shade50,
+                letterSpacing: 2, ),)),
             ),
             Expanded(
-              child: ListView.builder(
-                itemCount: albums?.length,
-                  itemBuilder: (context, index) {
-                  return Container(
-                  margin: const EdgeInsets.all(10),
-                  child: ListTile(
-                    tileColor: Colors.deepPurple.shade50,
-                    title: Text(albums![index].title, overflow: TextOverflow.ellipsis,),
-                           leading: Container(
-                      padding: const EdgeInsets.all(5),
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Colors.deepPurple.shade900, width: 1),
-                        borderRadius: BorderRadius.circular(10)
+              child: Obx(()=>ListView.builder(
+                  itemCount: albumController.albumList.length,
+                  itemBuilder: (_, index) {
+                    return Container(
+                      margin: EdgeInsets.all(10),
+                      child: ListTile(
+                        tileColor: Colors.deepPurple.shade50,
+                        title: Text(
+                          albumController.albumList[index].title,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                        leading: Text(albumController.albumList[index].id.toString()),
+                        trailing: Text(albumController.albumList[index].userId.toString()),
                       ),
-
-                    ),
-                  ),
-                );
-
-              }),
-            )
+                    );
+                  })),
+            ),
           ],
         ),
       ),
