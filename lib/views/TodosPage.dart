@@ -39,9 +39,15 @@ class TodosPageState extends State<TodosPage>{
                   itemBuilder: (context, index) {
                     return Container(
                   margin: EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    color: Colors.pink.shade100,
+                    borderRadius: BorderRadius.circular(10)
+                  ),
                   child: CheckboxListTile(
-                    tileColor: Colors.deepPurple.shade50,
-                    secondary: Icon(IconlyBold.buy),
+                    activeColor: AppColors.homeApiListTileColor[4],
+                    checkColor: Colors.white,
+                    tileColor: Colors.transparent,
+                    secondary: Icon(IconlyBold.buy, color: AppColors.homeApiListTileColor[4],),
                     title: Text(todoController.todoList[index].title.toString(), overflow: TextOverflow.ellipsis,),
                    subtitle: Text(todoController.todoList[index].title.toString(), overflow: TextOverflow.ellipsis,),
                    onChanged: (bool? value) {  },

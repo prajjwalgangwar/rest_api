@@ -43,8 +43,12 @@ class AlbumsPageState extends State<AlbumsPage> {
                   itemBuilder: (_, index) {
                     return Container(
                       margin: EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                        color: Colors.brown.shade300,
+                        borderRadius: BorderRadius.circular(10)
+                      ),
                       child: ListTile(
-                        tileColor: Colors.deepPurple.shade50,
+                        tileColor: Colors.transparent,
                         title: Text(
                           albumController.albumList[index].title,
                           overflow: TextOverflow.ellipsis,

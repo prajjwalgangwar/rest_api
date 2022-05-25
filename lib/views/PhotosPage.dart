@@ -45,6 +45,8 @@ class PhotosPage extends StatelessWidget{
                   return Container(
                   margin: const EdgeInsets.all(10),
                   decoration: BoxDecoration(
+                    color: Colors.grey.shade300,
+                    borderRadius: BorderRadius.circular(10),
                     border: Border.all(
                       color: Colors.red.shade900,
                       width: 5

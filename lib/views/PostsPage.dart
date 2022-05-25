@@ -39,18 +39,23 @@ class PostsPage extends StatelessWidget{
                   itemBuilder: (context, index) {
                     return Container(
                       margin: EdgeInsets.all(10),
+                      padding: EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                        color:  Colors.deepPurple.shade300,
+                        borderRadius: BorderRadius.circular(10)
+                      ),
                       child: ListTile(
-                        tileColor: Colors.deepPurple.shade50,
-                        title: Text(postController.postList[index].title, overflow: TextOverflow.ellipsis,),
-                        subtitle: Text(postController.postList[index].body!, overflow: TextOverflow.ellipsis,),
+                        tileColor: Colors.transparent,
+                        title: Text(postController.postList[index].title, overflow: TextOverflow.ellipsis, style: TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.w700),),
+                        subtitle: Text(postController.postList[index].body!, overflow: TextOverflow.fade,style: TextStyle(color: Colors.white70, fontSize: 10),),
                         leading: Container(
                             padding: EdgeInsets.all(5),
                             decoration: BoxDecoration(
-                                border: Border.all(color: Colors.deepPurple.shade900, width: 1),
+                                border: Border.all(color: Colors.white70, width: 1),
                                 borderRadius: BorderRadius.circular(10)
                             ),
                             child: Text(
-                                postController.postList[index].id.toString()
+                                postController.postList[index].id.toString(),style: TextStyle(color: Colors.white, fontSize: 14),
                             )
                         ),
                       ),

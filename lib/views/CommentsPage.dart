@@ -35,8 +35,12 @@ class CommentsPage extends StatelessWidget{
                   itemBuilder: (context, index) {
                   return Container(
                   margin: const EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    color: Colors.teal.shade300,
+                    borderRadius: BorderRadius.circular(20)
+                  ),
                   child: ListTile(
-                    tileColor: Colors.deepPurple.shade50,
+                    tileColor: Colors.transparent,
                     title: Text(commentController.commentList[index].name, overflow: TextOverflow.ellipsis,),
                     subtitle: Text(commentController.commentList[index].email, overflow: TextOverflow.ellipsis,),
                     leading: Container(
