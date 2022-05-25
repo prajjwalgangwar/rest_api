@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:rest_api/utilities/Constants.dart';
-import 'package:iconly/iconly.dart';
 import 'package:rest_api/utilities/Variables.dart';
 
 class CustomAppBar extends StatelessWidget{
@@ -13,7 +12,7 @@ class CustomAppBar extends StatelessWidget{
 
       decoration: BoxDecoration(
         color: Colors.orange,
-        borderRadius: BorderRadius.only(
+        borderRadius: const BorderRadius.only(
           bottomRight: Radius.circular(20),
           bottomLeft: Radius.circular(20)
         ),
@@ -39,7 +38,7 @@ class CustomAppBar extends StatelessWidget{
             alignment: Alignment.topCenter,
             child: Container(
               margin: const EdgeInsets.only(top: 20),
-              child: Text(AppConstants.appBarTitle, style: TextStyle(fontWeight: FontWeight.bold, letterSpacing: 2, fontSize: 14),)
+              child: Text(AppConstants.appBarTitle, style: const TextStyle(fontWeight: FontWeight.bold, letterSpacing: 2, fontSize: 14),)
             ),
           ),
           Align(
@@ -54,12 +53,18 @@ class CustomAppBar extends StatelessWidget{
                 scrollDirection: Axis.horizontal,
                   itemCount: Variables.apiExampleList.length,
                   itemBuilder: (context, index) {
-                return Container(
-                  margin: const EdgeInsets.all(10),
-                  child: Icon(
-                    Variables.apiExampleList.values.elementAt(index)[2],
-                    color: Variables.apiExampleList.values.elementAt(index)[3],
-                    size: 22,
+                return InkWell(
+                  splashColor: Colors.orange.shade50,
+                  onTap: (){
+                    Variables.route(index);
+                  },
+                  child: Container(
+                    margin: const EdgeInsets.all(10),
+                    child: Icon(
+                      Variables.apiExampleList.values.elementAt(index)[2],
+                      color: Variables.apiExampleList.values.elementAt(index)[3],
+                      size: 22,
+                    ),
                   ),
                 );
               })

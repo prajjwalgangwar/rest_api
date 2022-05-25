@@ -1,19 +1,15 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/instance_manager.dart';
-import 'package:iconly/iconly.dart';
-import 'package:rest_api/models/post_model.dart';
 import 'package:rest_api/providers/ServicesController.dart';
-import 'package:rest_api/providers/RemoteService.dart';
 import 'package:rest_api/utilities/AppColors.dart';
 import 'package:rest_api/utilities/Variables.dart';
-import 'package:rest_api/widgets/CustomAppBar.dart';
 
 
 class PostsPage extends StatelessWidget{
   
   final PostController postController = Get.put(PostController());
+
+  PostsPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -38,24 +34,24 @@ class PostsPage extends StatelessWidget{
                   itemCount: postController.postList.length,
                   itemBuilder: (context, index) {
                     return Container(
-                      margin: EdgeInsets.all(10),
-                      padding: EdgeInsets.all(10),
+                      margin: const EdgeInsets.all(10),
+                      padding: const EdgeInsets.all(10),
                       decoration: BoxDecoration(
                         color:  Colors.deepPurple.shade300,
                         borderRadius: BorderRadius.circular(10)
                       ),
                       child: ListTile(
                         tileColor: Colors.transparent,
-                        title: Text(postController.postList[index].title, overflow: TextOverflow.ellipsis, style: TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.w700),),
-                        subtitle: Text(postController.postList[index].body!, overflow: TextOverflow.fade,style: TextStyle(color: Colors.white70, fontSize: 10),),
+                        title: Text(postController.postList[index].title, overflow: TextOverflow.ellipsis, style: const TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.w700),),
+                        subtitle: Text(postController.postList[index].body!, overflow: TextOverflow.fade,style: const TextStyle(color: Colors.white70, fontSize: 10),),
                         leading: Container(
-                            padding: EdgeInsets.all(5),
+                            padding: const EdgeInsets.all(5),
                             decoration: BoxDecoration(
                                 border: Border.all(color: Colors.white70, width: 1),
                                 borderRadius: BorderRadius.circular(10)
                             ),
                             child: Text(
-                                postController.postList[index].id.toString(),style: TextStyle(color: Colors.white, fontSize: 14),
+                                postController.postList[index].id.toString(),style: const TextStyle(color: Colors.white, fontSize: 14),
                             )
                         ),
                       ),
