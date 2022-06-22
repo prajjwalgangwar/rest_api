@@ -10,4 +10,6 @@ class AppConstants{
     'https://jsonplaceholder.typicode.com/users',
     'https://anaajapp.com/api/categories'
   ];
+
+  static int index = 0;
 }

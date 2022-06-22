@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:rest_api/utilities/Constants.dart';
 import 'package:rest_api/utilities/Variables.dart';
+import 'package:rest_api/views/ResultPage.dart';
 import 'package:rest_api/widgets/CustomAppBar.dart';
 
 class Home extends StatelessWidget{
@@ -21,7 +24,8 @@ class Home extends StatelessWidget{
                   itemBuilder: (context, index) {
                 return InkWell(
                   onTap: ()async{
-                    Variables.route(index);
+                    AppConstants.index = index;
+                    Get.to(()=> ResultPage(), arguments: [index, Variables.apiExampleList.values.elementAt(index)]);
                   },
                   child: Container(
                     margin: const EdgeInsets.only(left: 20, right: 20, top: 30),

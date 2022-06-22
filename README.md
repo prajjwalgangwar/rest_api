@@ -1,6 +1,6 @@
 # rest_api
 
-A new Flutter project for the demo of rest api
+A new Flutter project for the demo of rest apis
 
 ## Getting Started
 

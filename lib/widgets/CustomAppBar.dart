@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:rest_api/utilities/Constants.dart';
 import 'package:rest_api/utilities/Variables.dart';
+import 'package:rest_api/views/ResultPage.dart';
 
 class CustomAppBar extends StatelessWidget{
   const CustomAppBar({Key? key}) : super(key: key);
@@ -56,7 +58,7 @@ class CustomAppBar extends StatelessWidget{
                 return InkWell(
                   splashColor: Colors.orange.shade50,
                   onTap: (){
-                    Variables.route(index);
+                    Get.to(()=> ResultPage(), arguments: [index, Variables.apiExampleList.values.elementAt(index)]);
                   },
                   child: Container(
                     margin: const EdgeInsets.all(10),
