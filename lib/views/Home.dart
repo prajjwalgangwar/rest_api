@@ -5,9 +5,18 @@ import 'package:rest_api/utilities/Variables.dart';
 import 'package:rest_api/views/ResultPage.dart';
 import 'package:rest_api/widgets/CustomAppBar.dart';
 
+import '../providers/ServicesController.dart';
+
 class Home extends StatelessWidget{
 
-  const Home({Key? key}) : super(key: key);
+   Home({Key? key}) : super(key: key);
+  final PostController postController = Get.put(PostController());
+  final CommentController commentController = Get.put(CommentController());
+  final AlbumController albumController = Get.put(AlbumController());
+  final PhotoController photosController = Get.put(PhotoController());
+  final TodoController todosController = Get.put(TodoController());
+  final UserController userController = Get.put(UserController());
+
 
 
   @override

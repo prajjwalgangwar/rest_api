@@ -14,12 +14,12 @@ import 'package:rest_api/widgets/UserListItem.dart';
 
 class ResultPage extends StatelessWidget {
 
-  final PostController postController = Get.put(PostController());
-  final CommentController commentController = Get.put(CommentController());
-  final AlbumController albumController = Get.put(AlbumController());
-  final PhotoController photosController = Get.put(PhotoController());
-  final TodoController todosController = Get.put(TodoController());
-  final UserController userController = Get.put(UserController());
+  final PostController postController = Get.find();
+  final CommentController commentController = Get.find();
+  final AlbumController albumController = Get.find();
+  final PhotoController photosController = Get.find();
+  final TodoController todosController = Get.find();
+  final UserController userController = Get.find();
 
   final arguments = Get.arguments;
 
